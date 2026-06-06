@@ -26,7 +26,7 @@ export function NewsletterForm({ variant = 'light' }: { variant?: 'light' | 'dar
         setTimeout(() => setDone(false), 2500);
       }}
       className={cn(
-        'focus-within:border-ink flex w-full items-center gap-2 rounded-full border p-1.5 pl-5 transition-colors',
+        'focus-within:border-ink flex w-full items-center gap-2 overflow-hidden rounded-full border p-1.5 pl-5 transition-colors',
         dark ? 'border-white/20 bg-white/10 focus-within:border-white' : 'border-hairline bg-canvas'
       )}
     >
@@ -37,7 +37,7 @@ export function NewsletterForm({ variant = 'light' }: { variant?: 'light' | 'dar
         onChange={(e) => setEmail(e.target.value)}
         placeholder="Enter your email"
         className={cn(
-          'text-body-sm h-10 flex-1 bg-transparent outline-none',
+          'text-body-sm h-10 min-w-0 flex-1 bg-transparent outline-none',
           dark ? 'text-white placeholder:text-white/50' : 'text-ink placeholder:text-muted-soft'
         )}
       />

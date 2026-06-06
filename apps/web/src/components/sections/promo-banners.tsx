@@ -9,15 +9,15 @@ export function PromoBanners() {
   const [feature, ...rest] = promoBanners;
   return (
     <section className="container-page py-14 sm:py-20">
-      <div className="grid gap-4 lg:grid-cols-3">
+      <div className="grid gap-4 lg:grid-cols-3 lg:items-stretch">
         {/* Feature banner */}
-        <Reveal className="lg:col-span-2">
-          <Banner banner={feature} large />
+        <Reveal className="h-full lg:col-span-2">
+          <Banner banner={feature} large className="h-full" />
         </Reveal>
-        <div className="grid gap-4">
+        <div className="grid gap-4 lg:grid-rows-2">
           {rest.map((b, i) => (
-            <Reveal key={b.id} delay={(i + 1) * 0.06}>
-              <Banner banner={b} />
+            <Reveal key={b.id} delay={(i + 1) * 0.06} className="h-full">
+              <Banner banner={b} className="h-full" />
             </Reveal>
           ))}
         </div>
@@ -29,9 +29,11 @@ export function PromoBanners() {
 function Banner({
   banner,
   large = false,
+  className,
 }: {
   banner: (typeof promoBanners)[number];
   large?: boolean;
+  className?: string;
 }) {
   const dark = banner.theme !== 'light';
   return (
@@ -39,7 +41,8 @@ function Banner({
       href={banner.href}
       className={cn(
         'group relative flex flex-col justify-end overflow-hidden rounded-2xl p-6 sm:p-8',
-        large ? 'min-h-72 lg:min-h-[26rem]' : 'min-h-44'
+        large ? 'min-h-72 lg:min-h-[26rem]' : 'min-h-44',
+        className
       )}
     >
       <Image

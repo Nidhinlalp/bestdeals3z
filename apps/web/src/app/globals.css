@@ -124,6 +124,10 @@
     text-rendering: optimizeLegibility;
     scroll-behavior: smooth;
     -webkit-tap-highlight-color: transparent;
+    /* Prevent any element from creating horizontal scroll on mobile.
+       Must be set on <html> — setting only on <body> is unreliable in
+       Chrome/Safari on iOS when position:fixed or transforms are used. */
+    overflow-x: hidden;
   }
 
   body {
@@ -409,6 +413,36 @@
 }
 .press:active {
   transform: scale(0.96);
+}
+
+/* Safe Area Inset bottom utilities — formatted with spaces for CSS calc compliance */
+.pb-safe-nav {
+  padding-bottom: env(safe-area-inset-bottom);
+  height: calc(64px + env(safe-area-inset-bottom));
+}
+.pb-safe-footer {
+  padding-bottom: calc(5rem + env(safe-area-inset-bottom));
+}
+@media (min-width: 64rem) {
+  .pb-safe-footer {
+    padding-bottom: 0px;
+  }
+}
+.pb-safe-main {
+  padding-bottom: calc(4rem + env(safe-area-inset-bottom));
+}
+@media (min-width: 64rem) {
+  .pb-safe-main {
+    padding-bottom: 0px;
+  }
+}
+.bottom-safe-fab {
+  bottom: calc(5rem + env(safe-area-inset-bottom));
+}
+@media (min-width: 64rem) {
+  .bottom-safe-fab {
+    bottom: 1.5rem;
+  }
 }
 
 /* Reduced motion — respect user preference */

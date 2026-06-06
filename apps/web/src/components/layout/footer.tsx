@@ -30,7 +30,7 @@ const footerNav = {
 
 export function Footer() {
   return (
-    <footer className="border-hairline bg-surface-soft mt-10 border-t">
+    <footer className="border-hairline bg-surface-soft pb-safe-footer mt-10 border-t">
       {/* Trust strip */}
       <div className="border-hairline border-b">
         <div className="container-page grid grid-cols-2 gap-x-6 gap-y-6 py-8 md:grid-cols-4">

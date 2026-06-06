@@ -102,13 +102,13 @@ export default function AboutPage() {
 
       {/* Stats */}
       <section className="container-page py-6 sm:py-10">
-        <div className="bg-gradient-ink grid grid-cols-2 gap-4 rounded-2xl p-6 text-white sm:p-10 md:grid-cols-4">
+        <div className="border-hairline bg-surface-soft grid grid-cols-2 gap-4 rounded-2xl border p-6 sm:p-10 md:grid-cols-4">
           {stats.map((s) => (
             <div key={s.label} className="text-center">
-              <span className="text-display-2xl font-extrabold">
+              <span className="text-display-2xl text-ink font-extrabold">
                 <AnimatedCounter value={s.value} decimals={s.decimals ?? 0} suffix={s.suffix} />
               </span>
-              <span className="text-caption mt-1 block text-white/60">{s.label}</span>
+              <span className="text-caption text-muted mt-1 block">{s.label}</span>
             </div>
           ))}
         </div>

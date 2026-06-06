@@ -10,8 +10,9 @@ import type { Request } from 'express';
 
 export const CurrentUser = createParamDecorator(
   (data: unknown, ctx: ExecutionContext) => {
-    const request = ctx.switchToHttp().getRequest<Request>();
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    return (request as any).user;
-  }
+    const request = ctx
+      .switchToHttp()
+      .getRequest<Request & { user?: unknown }>();
+    return request.user;
+  },
 );

@@ -38,7 +38,7 @@ export function FeaturedCollection() {
         </div>
 
         {/* Products */}
-        <div className="lg:pt-10">
+        <div className="min-w-0 lg:pt-10">
           <ProductRail products={products} />
         </div>
       </div>

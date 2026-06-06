@@ -72,17 +72,17 @@ export default function DealsPage() {
       {/* Flash sale grid */}
       {flash.length > 0 && (
         <section className="container-page py-6 sm:py-10">
-          <div className="bg-gradient-ink rounded-2xl p-6 sm:p-10">
+          <div className="border-hairline bg-surface-soft rounded-2xl border p-6 sm:p-10">
             <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
               <div>
                 <span className="bg-primary text-caption inline-flex items-center gap-2 rounded-full px-3 py-1 font-semibold text-white">
                   <Zap className="h-4 w-4 fill-white" /> Flash sale
                 </span>
-                <h2 className="text-display-2xl mt-3 text-white">Lightning deals</h2>
+                <h2 className="text-display-2xl text-ink mt-3">Lightning deals</h2>
               </div>
-              <Countdown hours={5} variant="dark" />
+              <Countdown hours={5} variant="light" />
             </div>
-            <div className="bg-canvas mt-8 rounded-xl p-4 sm:p-6">
+            <div className="mt-8">
               <ProductGrid products={flash} priorityCount={4} />
             </div>
           </div>

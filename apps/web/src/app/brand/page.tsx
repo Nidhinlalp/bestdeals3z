@@ -18,24 +18,25 @@ export default function BrandPage() {
   return (
     <>
       {/* Brand hero */}
-      <section className="bg-gradient-ink relative overflow-hidden text-white">
-        <div className="pointer-events-none absolute inset-0">
-          <div className="bg-primary/30 absolute left-1/4 top-0 h-96 w-96 rounded-full blur-3xl" />
-          <div className="bg-plus/30 absolute bottom-0 right-1/4 h-80 w-80 rounded-full blur-3xl" />
+      <section className="bg-canvas text-ink relative overflow-hidden">
+        <div aria-hidden className="pointer-events-none absolute inset-0">
+          <div className="animate-float bg-primary/10 absolute -top-10 left-1/4 h-96 w-96 rounded-full blur-[90px]" />
+          <div className="animate-float-slow bg-plus/10 absolute bottom-0 right-1/4 h-80 w-80 rounded-full blur-[90px]" />
+          <div className="absolute inset-0 bg-[radial-gradient(60%_50%_at_50%_0%,rgba(255,56,92,0.06),transparent)]" />
         </div>
         <div className="container-page relative flex flex-col items-center py-20 text-center sm:py-28">
-          <span className="text-caption inline-flex items-center gap-2 rounded-full bg-white/10 px-4 py-1.5 font-semibold backdrop-blur">
+          <span className="border-hairline bg-canvas text-caption text-ink inline-flex items-center gap-2 rounded-full border px-4 py-1.5 font-semibold shadow-[var(--shadow-card)]">
             <Sparkles className="text-primary h-4 w-4" /> A new kind of retail brand
           </span>
-          <h1 className="text-hero mt-6 max-w-4xl">
+          <h1 className="text-hero text-ink mt-6 max-w-4xl">
             Fresh. Fast. <span className="text-gradient-brand">Fearlessly modern.</span>
           </h1>
-          <p className="text-body-md mt-5 max-w-2xl text-white/70 sm:text-lg">
+          <p className="text-body-md text-muted mt-5 max-w-2xl sm:text-lg">
             {siteConfig.name} brings together the best of gadgets, electronics, home, toys and
             lifestyle — curated with taste, priced with honesty, and delivered at the speed of now.
           </p>
           <div className="mt-8 flex flex-wrap justify-center gap-3">
-            <Button href="/shop" size="lg" className="text-ink bg-white hover:bg-white/90">
+            <Button href="/shop" variant="primary" size="lg">
               Browse products
               <ArrowRight className="h-5 w-5" />
             </Button>
@@ -43,8 +44,8 @@ export default function BrandPage() {
               href={waHref(`Hi ${siteConfig.name}! I'd love to learn more about the brand.`)}
               target="_blank"
               rel="noopener noreferrer"
+              variant="whatsapp"
               size="lg"
-              className="bg-[#25D366] text-white hover:bg-[#1ebe5a]"
             >
               <MessageCircle className="h-5 w-5" /> Chat on WhatsApp
             </Button>

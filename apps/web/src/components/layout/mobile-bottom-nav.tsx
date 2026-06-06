@@ -51,7 +51,7 @@ export function MobileBottomNav() {
   );
 
   return (
-    <nav className="border-hairline bg-canvas/95 fixed inset-x-0 bottom-0 z-40 flex items-stretch border-t backdrop-blur-lg sm:hidden">
+    <nav className="border-hairline bg-canvas/95 pb-safe-nav fixed inset-x-0 bottom-0 z-40 flex items-stretch border-t backdrop-blur-lg lg:hidden">
       <Tab href="/" icon={Home} label="Home" active={pathname === '/'} />
       <Tab href="/shop" icon={Store} label="Shop" active={pathname.startsWith('/shop')} />
       <button type="button" onClick={openSearch} className={item(false)}>

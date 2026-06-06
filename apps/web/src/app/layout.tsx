@@ -49,7 +49,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
     <html lang="en" className={inter.variable}>
       <body className="font-sans antialiased">
         <Header />
-        <main className="min-h-[60vh] pb-16 sm:pb-0">{children}</main>
+        <main className="pb-safe-main min-h-[60vh]">{children}</main>
         <Footer />
 
         {/* Global overlays */}

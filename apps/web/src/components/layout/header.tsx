@@ -53,7 +53,7 @@ export function Header() {
             type="button"
             aria-label="Open menu"
             onClick={openMenu}
-            className="press text-ink hover:bg-surface-soft -ml-1 flex h-10 w-10 items-center justify-center rounded-full sm:hidden"
+            className="press text-ink hover:bg-surface-soft -ml-1 flex h-10 w-10 items-center justify-center rounded-full lg:hidden"
           >
             <Menu className="h-5.5 w-5.5" />
           </button>
@@ -61,7 +61,7 @@ export function Header() {
         </div>
 
         {/* Center nav (desktop) */}
-        <nav className="hidden items-center gap-1 lg:flex">
+        <nav className="hidden items-center gap-0.5 lg:flex">
           {navLinks.map((l) => {
             const active = l.href === '/' ? pathname === '/' : pathname.startsWith(l.href);
             return (
@@ -69,13 +69,13 @@ export function Header() {
                 key={l.href}
                 href={l.href}
                 className={cn(
-                  'text-nav-link relative rounded-full px-3.5 py-2 transition-colors',
+                  'text-nav-link relative rounded-full px-3 py-2 transition-colors',
                   active ? 'text-ink' : 'text-muted hover:text-ink'
                 )}
               >
                 {l.label}
                 {active && (
-                  <span className="bg-primary absolute inset-x-3.5 -bottom-0.5 h-0.5 rounded-full" />
+                  <span className="bg-primary absolute inset-x-3 -bottom-0.5 h-0.5 rounded-full" />
                 )}
               </Link>
             );
@@ -88,17 +88,17 @@ export function Header() {
           <button
             type="button"
             onClick={openSearch}
-            className="press border-hairline bg-canvas text-body-sm text-muted hover:border-ink hidden h-11 items-center gap-2 rounded-full border px-4 transition-all hover:shadow-[var(--shadow-card)] md:flex"
+            className="press border-hairline bg-canvas text-body-sm text-muted hover:border-ink hidden h-11 items-center gap-2 rounded-full border px-4 transition-all hover:shadow-[var(--shadow-card)] lg:flex"
           >
             <Search className="h-4 w-4" />
-            <span className="pr-6">Search products…</span>
+            <span className="pr-2 xl:pr-8">Search…</span>
           </button>
           {/* Mobile search icon */}
           <button
             type="button"
             aria-label="Search"
             onClick={openSearch}
-            className="press text-ink hover:bg-surface-soft flex h-10 w-10 items-center justify-center rounded-full md:hidden"
+            className="press text-ink hover:bg-surface-soft flex h-10 w-10 items-center justify-center rounded-full lg:hidden"
           >
             <Search className="h-5 w-5" />
           </button>
@@ -106,7 +106,7 @@ export function Header() {
           <Link
             href="/wishlist"
             aria-label="Wishlist"
-            className="press text-ink hover:bg-surface-soft relative hidden h-10 w-10 items-center justify-center rounded-full sm:flex"
+            className="press text-ink hover:bg-surface-soft relative hidden h-10 w-10 items-center justify-center rounded-full lg:flex"
           >
             <Heart className="h-5 w-5" />
             {mounted && <CountDot count={wishCount} />}
@@ -129,24 +129,43 @@ export function Header() {
         <div className="container-page no-scrollbar flex items-center gap-5 overflow-x-auto py-2.5">
           <Link
             href="/shop"
-            className="text-button-sm text-ink hover:text-primary shrink-0 font-semibold transition-colors"
+            className={cn(
+              'text-button-sm relative shrink-0 py-1 transition-colors',
+              pathname === '/shop' ? 'text-ink font-semibold' : 'text-muted hover:text-ink'
+            )}
           >
             All products
+            {pathname === '/shop' && (
+              <span className="bg-primary absolute inset-x-0 -bottom-[11px] h-0.5" />
+            )}
           </Link>
-          {categories.map((c) => (
-            <Link
-              key={c.slug}
-              href={`/categories/${c.slug}`}
-              className="text-button-sm text-muted hover:text-ink shrink-0 transition-colors"
-            >
-              {c.name}
-            </Link>
-          ))}
+          {categories.map((c) => {
+            const active = pathname === `/categories/${c.slug}`;
+            return (
+              <Link
+                key={c.slug}
+                href={`/categories/${c.slug}`}
+                className={cn(
+                  'text-button-sm relative shrink-0 py-1 transition-colors',
+                  active ? 'text-ink font-semibold' : 'text-muted hover:text-ink'
+                )}
+              >
+                {c.name}
+                {active && <span className="bg-primary absolute inset-x-0 -bottom-[11px] h-0.5" />}
+              </Link>
+            );
+          })}
           <Link
             href="/deals"
-            className="text-button-sm text-primary ml-auto shrink-0 font-semibold"
+            className={cn(
+              'text-button-sm relative ml-auto shrink-0 py-1 font-semibold transition-colors',
+              pathname === '/deals' ? 'text-primary' : 'text-primary hover:opacity-85'
+            )}
           >
             🔥 Today&apos;s deals
+            {pathname === '/deals' && (
+              <span className="bg-primary absolute inset-x-0 -bottom-[11px] h-0.5" />
+            )}
           </Link>
         </div>
       </div>

@@ -24,13 +24,13 @@ async function bootstrap() {
   // Global validation pipe (validates all DTOs automatically)
   app.useGlobalPipes(
     new ValidationPipe({
-      whitelist: true,         // Strip unknown properties
+      whitelist: true, // Strip unknown properties
       forbidNonWhitelisted: true, // Throw on unknown properties
-      transform: true,         // Auto-transform payloads to DTO types
+      transform: true, // Auto-transform payloads to DTO types
       transformOptions: {
         enableImplicitConversion: true,
       },
-    })
+    }),
   );
 
   const port = process.env['PORT'] ?? 3333;
@@ -40,5 +40,6 @@ async function bootstrap() {
   logger.log(`📚 Environment: ${process.env['NODE_ENV'] ?? 'development'}`);
 }
 
-bootstrap();
-
+bootstrap().catch((err) => {
+  new Logger('Bootstrap').error('Bootstrap failed', err);
+});

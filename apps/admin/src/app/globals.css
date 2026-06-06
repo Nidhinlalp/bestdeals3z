@@ -1,26 +1,249 @@
+/* =============================================================================
+   apps/admin — Global Styles
+   =============================================================================
+   Admin panel uses the same Airbnb design tokens as the web store.
+   Admin deviates only where UI density requires it (tighter spacing, etc.)
+   ============================================================================= */
+
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-primary:        var(--color-primary);
+  --color-primary-active: var(--color-primary-active);
+  --color-ink:            var(--color-ink);
+  --color-canvas:         var(--color-canvas);
+  --color-muted:          var(--color-muted);
+  --color-hairline:       var(--color-hairline);
+  --font-sans: var(--font-inter, 'Inter'), -apple-system, system-ui, sans-serif;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* -------------------------------------------------------------------------
+   Design tokens (same as apps/web — sourced from DESIGN-airbnb.md)
+   ------------------------------------------------------------------------- */
+:root {
+  /* Brand */
+  --color-primary:          #ff385c;
+  --color-primary-active:   #e00b41;
+  --color-primary-disabled: #ffd1da;
+  --color-error-text:       #c13515;
+
+  /* Text */
+  --color-ink:              #222222;
+  --color-body:             #3f3f3f;
+  --color-muted:            #6a6a6a;
+  --color-muted-soft:       #929292;
+  --color-on-primary:       #ffffff;
+  --color-on-dark:          #ffffff;
+  --color-legal-link:       #428bff;
+
+  /* Surface */
+  --color-canvas:           #ffffff;
+  --color-surface-soft:     #f7f7f7;
+  --color-surface-card:     #ffffff;
+  --color-surface-strong:   #f2f2f2;
+
+  /* Hairlines */
+  --color-hairline:         #dddddd;
+  --color-hairline-soft:    #ebebeb;
+  --color-border-strong:    #c1c1c1;
+
+  /* Border Radius */
+  --radius-none:  0px;
+  --radius-xs:    4px;
+  --radius-sm:    8px;
+  --radius-md:    14px;
+  --radius-lg:    20px;
+  --radius-xl:    32px;
+  --radius-full:  9999px;
+
+  /* Spacing */
+  --spacing-xxs:     2px;
+  --spacing-xs:      4px;
+  --spacing-sm:      8px;
+  --spacing-md:      12px;
+  --spacing-base:    16px;
+  --spacing-lg:      24px;
+  --spacing-xl:      32px;
+  --spacing-xxl:     48px;
+  --spacing-section: 64px;
+
+  /* Elevation */
+  --shadow-card: rgba(0, 0, 0, 0.02) 0 0 0 1px,
+                 rgba(0, 0, 0, 0.04) 0 2px 6px 0,
+                 rgba(0, 0, 0, 0.10) 0 4px 8px 0;
+
+  /* Transitions */
+  --transition-fast:  150ms ease;
+  --transition-base:  200ms ease;
+  --transition-slow:  300ms ease;
+
+  /* Component sizing */
+  --nav-height:       80px;
+  --button-height-md: 48px;
+  --button-height-sm: 40px;
+  --icon-btn-size:    32px;
+  --input-height:     56px;
+
+  /* Layout */
+  --container-max:    1280px;
+}
+
+/* -------------------------------------------------------------------------
+   Base
+   ------------------------------------------------------------------------- */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: var(--color-canvas);
+  color: var(--color-ink);
+  font-family: var(--font-inter, 'Inter'), -apple-system, system-ui, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+  margin: 0;
+}
+
+/* -------------------------------------------------------------------------
+   Typography scale — Airbnb spec (same tokens as web)
+   ------------------------------------------------------------------------- */
+.text-display-xl  { font-size: 1.75rem;   font-weight: 700; line-height: 1.43; letter-spacing: 0; }
+.text-display-lg  { font-size: 1.375rem;  font-weight: 500; line-height: 1.18; letter-spacing: -0.44px; }
+.text-display-md  { font-size: 1.3125rem; font-weight: 700; line-height: 1.43; letter-spacing: 0; }
+.text-display-sm  { font-size: 1.25rem;   font-weight: 600; line-height: 1.20; letter-spacing: -0.18px; }
+.text-title-md    { font-size: 1rem;      font-weight: 600; line-height: 1.25; letter-spacing: 0; }
+.text-title-sm    { font-size: 1rem;      font-weight: 500; line-height: 1.25; letter-spacing: 0; }
+.text-body-md     { font-size: 1rem;      font-weight: 400; line-height: 1.5;  letter-spacing: 0; }
+.text-body-sm     { font-size: 0.875rem;  font-weight: 400; line-height: 1.43; letter-spacing: 0; }
+.text-caption     { font-size: 0.875rem;  font-weight: 500; line-height: 1.29; letter-spacing: 0; }
+.text-caption-sm  { font-size: 0.8125rem; font-weight: 400; line-height: 1.23; letter-spacing: 0; }
+.text-badge       { font-size: 0.6875rem; font-weight: 600; line-height: 1.18; letter-spacing: 0; }
+.text-micro-label { font-size: 0.75rem;   font-weight: 700; line-height: 1.33; letter-spacing: 0; }
+.text-button-md   { font-size: 1rem;      font-weight: 500; line-height: 1.25; letter-spacing: 0; }
+.text-button-sm   { font-size: 0.875rem;  font-weight: 500; line-height: 1.29; letter-spacing: 0; }
+.text-nav-link    { font-size: 1rem;      font-weight: 600; line-height: 1.25; letter-spacing: 0; }
+
+/* -------------------------------------------------------------------------
+   Admin-specific overrides
+   (Admin can be slightly denser than the public-facing store)
+   ------------------------------------------------------------------------- */
+
+/* Admin sidebar panel */
+.admin-sidebar {
+  background-color: var(--color-canvas);
+  border-right: 1px solid var(--color-hairline);
+  width: 240px;
+  min-height: 100dvh;
+}
+
+/* Admin data table */
+.admin-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.875rem;
+  color: var(--color-ink);
+}
+
+.admin-table th {
+  font-weight: 600;
+  text-align: left;
+  padding: var(--spacing-sm) var(--spacing-base);
+  border-bottom: 2px solid var(--color-hairline);
+  color: var(--color-muted);
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.admin-table td {
+  padding: var(--spacing-sm) var(--spacing-base);
+  border-bottom: 1px solid var(--color-hairline-soft);
+  vertical-align: middle;
+}
+
+.admin-table tr:hover td {
+  background-color: var(--color-surface-soft);
+}
+
+/* Admin badge / status pills */
+.status-badge {
+  display: inline-flex;
+  align-items: center;
+  border-radius: var(--radius-full);
+  padding: 2px 10px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  line-height: 1.5;
+}
+
+.status-badge--active    { background-color: #d1fae5; color: #065f46; }
+.status-badge--pending   { background-color: #fef3c7; color: #92400e; }
+.status-badge--inactive  { background-color: var(--color-surface-strong); color: var(--color-muted); }
+.status-badge--error     { background-color: #fee2e2; color: #991b1b; }
+
+/* Buttons */
+.btn-primary {
+  background-color: var(--color-primary);
+  color: var(--color-on-primary);
+  border-radius: var(--radius-sm);
+  padding: 14px 24px;
+  height: var(--button-height-md);
+  font-size: 1rem;
+  font-weight: 500;
+  border: none;
+  cursor: pointer;
+  transition: background-color var(--transition-fast);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-primary:hover { background-color: var(--color-primary-active); }
+.btn-primary:disabled { background-color: var(--color-primary-disabled); cursor: not-allowed; }
+
+.btn-secondary {
+  background-color: var(--color-canvas);
+  color: var(--color-ink);
+  border-radius: var(--radius-sm);
+  padding: 13px 23px;
+  height: var(--button-height-md);
+  font-size: 1rem;
+  font-weight: 500;
+  border: 1px solid var(--color-ink);
+  cursor: pointer;
+  transition: background-color var(--transition-fast);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-secondary:hover { background-color: var(--color-surface-soft); }
+
+/* Card */
+.card {
+  background-color: var(--color-canvas);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--color-hairline);
+  padding: var(--spacing-lg);
+}
+
+/* Dividers */
+.divider      { border: none; border-top: 1px solid var(--color-hairline); }
+.divider-soft { border: none; border-top: 1px solid var(--color-hairline-soft); }
+
+/* Container */
+.container-main {
+  max-width: var(--container-max);
+  margin-inline: auto;
+  padding-inline: var(--spacing-xl);
 }

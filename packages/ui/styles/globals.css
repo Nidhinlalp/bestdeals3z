@@ -1,11 +1,12 @@
 /* =============================================================================
-   @ecom/ui — Global Design System Styles
+   @ecom/ui — Airbnb Design System Tokens
    =============================================================================
-   This file defines CSS custom properties (design tokens) for the entire
-   platform. All components should reference these tokens rather than
-   hardcoded values.
+   Single source of truth for all design tokens across the ecommerce platform.
+   Derived from the Airbnb design system specification (docs/DESIGN-airbnb.md).
 
-   Inspired by: Airbnb-style modern premium ecommerce design
+   Font: Inter (open-source substitute for Airbnb Cereal VF / Circular)
+   Accent: Rausch #ff385c — the single brand color
+   Canvas: Pure white — no dark mode on the public web
    ============================================================================= */
 
 @tailwind base;
@@ -14,68 +15,231 @@
 
 @layer base {
   :root {
-    /* Color Palette — Light Mode */
-    --color-primary: 221 83% 53%;
-    --color-primary-foreground: 0 0% 100%;
+    /* -------------------------------------------------------------------------
+       COLORS — Brand & Accent
+       ------------------------------------------------------------------------- */
 
-    --color-secondary: 210 40% 96%;
-    --color-secondary-foreground: 222 47% 11%;
+    /* Rausch — the single brand voltage */
+    --color-primary:          #ff385c;
+    --color-primary-active:   #e00b41;
+    --color-primary-disabled: #ffd1da;
 
-    --color-accent: 262 83% 58%;
-    --color-accent-foreground: 0 0% 100%;
+    /* Error (distinct from Rausch — slightly darker, more saturated) */
+    --color-error-text:       #c13515;
+    --color-error-text-hover: #b32505;
 
-    --color-background: 0 0% 100%;
-    --color-foreground: 222 47% 11%;
+    /* Sub-brand (Luxe / Plus contexts only — not for general use) */
+    --color-luxe:             #460479;
+    --color-plus:             #92174d;
 
-    --color-muted: 210 40% 96%;
-    --color-muted-foreground: 215 16% 47%;
+    /* -------------------------------------------------------------------------
+       COLORS — Text
+       ------------------------------------------------------------------------- */
+    --color-ink:              #222222; /* Dominant — headlines, body, nav links */
+    --color-body:             #3f3f3f; /* Secondary running-text (review/amenity) */
+    --color-muted:            #6a6a6a; /* Sub-titles, inactive tabs, footer labels */
+    --color-muted-soft:       #929292; /* Disabled link text — use sparingly */
+    --color-on-primary:       #ffffff; /* White text on Rausch CTAs */
+    --color-on-dark:          #ffffff; /* White text on dark surfaces */
+    --color-star-rating:      #222222; /* Ink — Airbnb uses ink stars, not gold */
+    --color-legal-link:       #428bff; /* Legal copy links only */
 
-    --color-card: 0 0% 100%;
-    --color-card-foreground: 222 47% 11%;
+    /* -------------------------------------------------------------------------
+       COLORS — Surface
+       ------------------------------------------------------------------------- */
+    --color-canvas:           #ffffff; /* Default page floor */
+    --color-surface-soft:     #f7f7f7; /* Disabled fields, hover backgrounds */
+    --color-surface-card:     #ffffff; /* Card surfaces */
+    --color-surface-strong:   #f2f2f2; /* Icon-button backgrounds */
 
-    --color-border: 214 32% 91%;
-    --color-input: 214 32% 91%;
-    --color-ring: 221 83% 53%;
+    /* -------------------------------------------------------------------------
+       COLORS — Hairlines & Borders
+       ------------------------------------------------------------------------- */
+    --color-hairline:         #dddddd; /* 1px default border — search dividers, separators */
+    --color-hairline-soft:    #ebebeb; /* Lighter — editorial body separators */
+    --color-border-strong:    #c1c1c1; /* Disabled outlines, focused input borders */
 
-    --color-success: 142 71% 45%;
-    --color-warning: 38 92% 50%;
-    --color-error: 0 84% 60%;
+    /* -------------------------------------------------------------------------
+       COLORS — Scrim
+       ------------------------------------------------------------------------- */
+    --color-scrim:            #000000; /* Applied at 50% opacity for modal backdrops */
 
-    /* Border Radius */
-    --radius-sm: 0.375rem;
-    --radius-md: 0.5rem;
-    --radius-lg: 0.75rem;
-    --radius-xl: 1rem;
-    --radius-2xl: 1.5rem;
-    --radius-full: 9999px;
+    /* -------------------------------------------------------------------------
+       TYPOGRAPHY — Font Family
+       Inter is the closest open-source substitute for Airbnb Cereal VF / Circular.
+       Fallback chain mirrors the Airbnb spec.
+       ------------------------------------------------------------------------- */
+    --font-sans: 'Inter', -apple-system, system-ui, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+    --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
 
-    /* Spacing Scale (base 4px) */
-    --space-1: 0.25rem;
-    --space-2: 0.5rem;
-    --space-3: 0.75rem;
-    --space-4: 1rem;
-    --space-6: 1.5rem;
-    --space-8: 2rem;
-    --space-12: 3rem;
-    --space-16: 4rem;
-    --space-24: 6rem;
+    /* -------------------------------------------------------------------------
+       TYPOGRAPHY — Scale
+       Token naming follows DESIGN-airbnb.md exactly.
+       All sizes in px, converted to rem for implementation.
+       -------------------------------------------------------------------------
 
-    /* Typography */
-    --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-    --font-mono: 'JetBrains Mono', 'Fira Code', 'Cascadia Code', monospace;
+       display-xl:    28px / 700 / lh 1.43 / ls 0
+       display-lg:    22px / 500 / lh 1.18 / ls -0.44px
+       display-md:    21px / 700 / lh 1.43 / ls 0
+       display-sm:    20px / 600 / lh 1.20 / ls -0.18px
+       title-md:      16px / 600 / lh 1.25 / ls 0
+       title-sm:      16px / 500 / lh 1.25 / ls 0
+       rating-display:64px / 700 / lh 1.10 / ls -1px
+       body-md:       16px / 400 / lh 1.50 / ls 0
+       body-sm:       14px / 400 / lh 1.43 / ls 0
+       caption:       14px / 500 / lh 1.29 / ls 0
+       caption-sm:    13px / 400 / lh 1.23 / ls 0
+       badge:         11px / 600 / lh 1.18 / ls 0
+       micro-label:   12px / 700 / lh 1.33 / ls 0
+       uppercase-tag:  8px / 700 / lh 1.25 / ls 0.32px uppercase
+       button-md:     16px / 500 / lh 1.25 / ls 0
+       button-sm:     14px / 500 / lh 1.29 / ls 0
+       link:          14px / 400 / lh 1.43 / ls 0
+       nav-link:      16px / 600 / lh 1.25 / ls 0
+       ------------------------------------------------------------------------- */
 
-    /* Shadows */
-    --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
-    --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
-    --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
-    --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+    --text-display-xl-size:     1.75rem;   /* 28px */
+    --text-display-xl-weight:   700;
+    --text-display-xl-lh:       1.43;
+    --text-display-xl-ls:       0;
 
-    /* Transitions */
-    --transition-fast: 150ms ease;
-    --transition-base: 200ms ease;
-    --transition-slow: 300ms ease;
+    --text-display-lg-size:     1.375rem;  /* 22px */
+    --text-display-lg-weight:   500;
+    --text-display-lg-lh:       1.18;
+    --text-display-lg-ls:       -0.44px;
+
+    --text-display-md-size:     1.3125rem; /* 21px */
+    --text-display-md-weight:   700;
+    --text-display-md-lh:       1.43;
+    --text-display-md-ls:       0;
+
+    --text-display-sm-size:     1.25rem;   /* 20px */
+    --text-display-sm-weight:   600;
+    --text-display-sm-lh:       1.20;
+    --text-display-sm-ls:       -0.18px;
+
+    --text-title-md-size:       1rem;      /* 16px */
+    --text-title-md-weight:     600;
+    --text-title-md-lh:         1.25;
+    --text-title-md-ls:         0;
+
+    --text-title-sm-size:       1rem;      /* 16px */
+    --text-title-sm-weight:     500;
+    --text-title-sm-lh:         1.25;
+    --text-title-sm-ls:         0;
+
+    --text-rating-display-size:   4rem;    /* 64px */
+    --text-rating-display-weight: 700;
+    --text-rating-display-lh:     1.10;
+    --text-rating-display-ls:     -1px;
+
+    --text-body-md-size:        1rem;      /* 16px */
+    --text-body-md-weight:      400;
+    --text-body-md-lh:          1.5;
+    --text-body-md-ls:          0;
+
+    --text-body-sm-size:        0.875rem;  /* 14px */
+    --text-body-sm-weight:      400;
+    --text-body-sm-lh:          1.43;
+    --text-body-sm-ls:          0;
+
+    --text-caption-size:        0.875rem;  /* 14px */
+    --text-caption-weight:      500;
+    --text-caption-lh:          1.29;
+    --text-caption-ls:          0;
+
+    --text-caption-sm-size:     0.8125rem; /* 13px */
+    --text-caption-sm-weight:   400;
+    --text-caption-sm-lh:       1.23;
+    --text-caption-sm-ls:       0;
+
+    --text-badge-size:          0.6875rem; /* 11px */
+    --text-badge-weight:        600;
+    --text-badge-lh:            1.18;
+    --text-badge-ls:            0;
+
+    --text-micro-label-size:    0.75rem;   /* 12px */
+    --text-micro-label-weight:  700;
+    --text-micro-label-lh:      1.33;
+    --text-micro-label-ls:      0;
+
+    --text-uppercase-tag-size:  0.5rem;    /* 8px */
+    --text-uppercase-tag-weight:700;
+    --text-uppercase-tag-lh:    1.25;
+    --text-uppercase-tag-ls:    0.32px;
+
+    --text-button-md-size:      1rem;      /* 16px */
+    --text-button-md-weight:    500;
+    --text-button-md-lh:        1.25;
+    --text-button-md-ls:        0;
+
+    --text-button-sm-size:      0.875rem;  /* 14px */
+    --text-button-sm-weight:    500;
+    --text-button-sm-lh:        1.29;
+    --text-button-sm-ls:        0;
+
+    --text-nav-link-size:       1rem;      /* 16px */
+    --text-nav-link-weight:     600;
+    --text-nav-link-lh:         1.25;
+    --text-nav-link-ls:         0;
+
+    /* -------------------------------------------------------------------------
+       BORDER RADIUS
+       Airbnb shape language: soft everywhere, no hard corners on interactive elements
+       ------------------------------------------------------------------------- */
+    --radius-none:  0px;
+    --radius-xs:    4px;
+    --radius-sm:    8px;    /* buttons, inputs */
+    --radius-md:    14px;   /* property cards */
+    --radius-lg:    20px;
+    --radius-xl:    32px;   /* category strip pills */
+    --radius-full:  9999px; /* search bar, orbs, pills, hearts */
+
+    /* -------------------------------------------------------------------------
+       SPACING — 4px base system
+       ------------------------------------------------------------------------- */
+    --spacing-xxs:    2px;
+    --spacing-xs:     4px;
+    --spacing-sm:     8px;
+    --spacing-md:     12px;
+    --spacing-base:   16px;
+    --spacing-lg:     24px;
+    --spacing-xl:     32px;
+    --spacing-xxl:    48px;
+    --spacing-section:64px;
+
+    /* -------------------------------------------------------------------------
+       ELEVATION
+       Single shadow tier — used on: card hover, search bar, dropdowns
+       Flat baseline is the default (no shadow on 95% of surfaces)
+       ------------------------------------------------------------------------- */
+    --shadow-card: rgba(0, 0, 0, 0.02) 0 0 0 1px,
+                   rgba(0, 0, 0, 0.04) 0 2px 6px 0,
+                   rgba(0, 0, 0, 0.10) 0 4px 8px 0;
+
+    /* -------------------------------------------------------------------------
+       TRANSITIONS
+       ------------------------------------------------------------------------- */
+    --transition-fast:   150ms ease;
+    --transition-base:   200ms ease;
+    --transition-slow:   300ms ease;
+
+    /* -------------------------------------------------------------------------
+       COMPONENT SIZING
+       ------------------------------------------------------------------------- */
+    --nav-height:         80px;
+    --search-bar-height:  64px;
+    --search-orb-size:    48px;
+    --button-height-md:   48px;
+    --button-height-sm:   40px;
+    --icon-btn-size:      32px;
+    --input-height:       56px;
+    --date-cell-size:     40px;
+
+    /* -------------------------------------------------------------------------
+       LAYOUT
+       ------------------------------------------------------------------------- */
+    --container-max:      1280px;
+    --container-detail:   1080px;
   }
-
-  /* TODO: Dark Mode tokens */
-  /* .dark { ... } */
 }

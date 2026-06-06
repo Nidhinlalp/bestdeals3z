@@ -1,26 +1,441 @@
+/* =============================================================================
+   apps/web — Global Styles
+   =============================================================================
+   Imports Airbnb design tokens and applies baseline styles.
+   Do NOT add custom design tokens here — they live in:
+     packages/ui/styles/globals.css
+   ============================================================================= */
+
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
+/* -------------------------------------------------------------------------
+   Tailwind v4 theme mapping — bridges CSS custom properties to Tailwind
+   ------------------------------------------------------------------------- */
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  /* Colors */
+  --color-primary:          var(--color-primary);
+  --color-primary-active:   var(--color-primary-active);
+  --color-primary-disabled: var(--color-primary-disabled);
+  --color-ink:              var(--color-ink);
+  --color-body-text:        var(--color-body);
+  --color-muted:            var(--color-muted);
+  --color-muted-soft:       var(--color-muted-soft);
+  --color-canvas:           var(--color-canvas);
+  --color-surface-soft:     var(--color-surface-soft);
+  --color-surface-strong:   var(--color-surface-strong);
+  --color-hairline:         var(--color-hairline);
+  --color-hairline-soft:    var(--color-hairline-soft);
+  --color-border-strong:    var(--color-border-strong);
+  --color-error-text:       var(--color-error-text);
+
+  /* Typography */
+  --font-sans: var(--font-inter), 'Inter', -apple-system, system-ui, sans-serif;
+
+  /* Border Radius */
+  --radius-none: var(--radius-none);
+  --radius-xs:   var(--radius-xs);
+  --radius-sm:   var(--radius-sm);
+  --radius-md:   var(--radius-md);
+  --radius-lg:   var(--radius-lg);
+  --radius-xl:   var(--radius-xl);
+  --radius-full: var(--radius-full);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* -------------------------------------------------------------------------
+   Design tokens — inline from @ecom/ui
+   (Duplicated here so the web app works standalone without the package import)
+   ------------------------------------------------------------------------- */
+:root {
+  /* Brand */
+  --color-primary:          #ff385c;
+  --color-primary-active:   #e00b41;
+  --color-primary-disabled: #ffd1da;
+  --color-error-text:       #c13515;
+  --color-error-text-hover: #b32505;
+  --color-luxe:             #460479;
+  --color-plus:             #92174d;
+
+  /* Text */
+  --color-ink:              #222222;
+  --color-body:             #3f3f3f;
+  --color-muted:            #6a6a6a;
+  --color-muted-soft:       #929292;
+  --color-on-primary:       #ffffff;
+  --color-on-dark:          #ffffff;
+  --color-star-rating:      #222222;
+  --color-legal-link:       #428bff;
+
+  /* Surface */
+  --color-canvas:           #ffffff;
+  --color-surface-soft:     #f7f7f7;
+  --color-surface-card:     #ffffff;
+  --color-surface-strong:   #f2f2f2;
+
+  /* Hairlines */
+  --color-hairline:         #dddddd;
+  --color-hairline-soft:    #ebebeb;
+  --color-border-strong:    #c1c1c1;
+
+  /* Scrim */
+  --color-scrim:            #000000;
+
+  /* Border Radius */
+  --radius-none:  0px;
+  --radius-xs:    4px;
+  --radius-sm:    8px;
+  --radius-md:    14px;
+  --radius-lg:    20px;
+  --radius-xl:    32px;
+  --radius-full:  9999px;
+
+  /* Spacing */
+  --spacing-xxs:     2px;
+  --spacing-xs:      4px;
+  --spacing-sm:      8px;
+  --spacing-md:      12px;
+  --spacing-base:    16px;
+  --spacing-lg:      24px;
+  --spacing-xl:      32px;
+  --spacing-xxl:     48px;
+  --spacing-section: 64px;
+
+  /* Elevation — single shadow tier */
+  --shadow-card: rgba(0, 0, 0, 0.02) 0 0 0 1px,
+                 rgba(0, 0, 0, 0.04) 0 2px 6px 0,
+                 rgba(0, 0, 0, 0.10) 0 4px 8px 0;
+
+  /* Transitions */
+  --transition-fast:   150ms ease;
+  --transition-base:   200ms ease;
+  --transition-slow:   300ms ease;
+
+  /* Component sizing */
+  --nav-height:         80px;
+  --search-bar-height:  64px;
+  --search-orb-size:    48px;
+  --button-height-md:   48px;
+  --button-height-sm:   40px;
+  --icon-btn-size:      32px;
+  --input-height:       56px;
+  --date-cell-size:     40px;
+
+  /* Layout */
+  --container-max:    1280px;
+  --container-detail: 1080px;
+}
+
+/* -------------------------------------------------------------------------
+   Base styles — applied to all elements
+   ------------------------------------------------------------------------- */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: var(--color-canvas);
+  color: var(--color-ink);
+  font-family: var(--font-inter, 'Inter'), -apple-system, system-ui, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+  font-size: 1rem;         /* 16px — body-md */
+  font-weight: 400;
+  line-height: 1.5;
+  margin: 0;
+}
+
+/* -------------------------------------------------------------------------
+   Typography utility classes — Airbnb type scale
+   (Use these instead of one-off font-size utilities)
+   ------------------------------------------------------------------------- */
+.text-display-xl {
+  font-size: 1.75rem;       /* 28px */
+  font-weight: 700;
+  line-height: 1.43;
+  letter-spacing: 0;
+}
+
+.text-display-lg {
+  font-size: 1.375rem;      /* 22px */
+  font-weight: 500;
+  line-height: 1.18;
+  letter-spacing: -0.44px;
+}
+
+.text-display-md {
+  font-size: 1.3125rem;     /* 21px */
+  font-weight: 700;
+  line-height: 1.43;
+  letter-spacing: 0;
+}
+
+.text-display-sm {
+  font-size: 1.25rem;       /* 20px */
+  font-weight: 600;
+  line-height: 1.20;
+  letter-spacing: -0.18px;
+}
+
+.text-title-md {
+  font-size: 1rem;          /* 16px */
+  font-weight: 600;
+  line-height: 1.25;
+  letter-spacing: 0;
+}
+
+.text-title-sm {
+  font-size: 1rem;          /* 16px */
+  font-weight: 500;
+  line-height: 1.25;
+  letter-spacing: 0;
+}
+
+.text-rating-display {
+  font-size: 4rem;          /* 64px */
+  font-weight: 700;
+  line-height: 1.10;
+  letter-spacing: -1px;
+}
+
+.text-body-md {
+  font-size: 1rem;          /* 16px */
+  font-weight: 400;
+  line-height: 1.5;
+  letter-spacing: 0;
+}
+
+.text-body-sm {
+  font-size: 0.875rem;      /* 14px */
+  font-weight: 400;
+  line-height: 1.43;
+  letter-spacing: 0;
+}
+
+.text-caption {
+  font-size: 0.875rem;      /* 14px */
+  font-weight: 500;
+  line-height: 1.29;
+  letter-spacing: 0;
+}
+
+.text-caption-sm {
+  font-size: 0.8125rem;     /* 13px */
+  font-weight: 400;
+  line-height: 1.23;
+  letter-spacing: 0;
+}
+
+.text-badge {
+  font-size: 0.6875rem;     /* 11px */
+  font-weight: 600;
+  line-height: 1.18;
+  letter-spacing: 0;
+}
+
+.text-micro-label {
+  font-size: 0.75rem;       /* 12px */
+  font-weight: 700;
+  line-height: 1.33;
+  letter-spacing: 0;
+}
+
+.text-uppercase-tag {
+  font-size: 0.5rem;        /* 8px */
+  font-weight: 700;
+  line-height: 1.25;
+  letter-spacing: 0.32px;
+  text-transform: uppercase;
+}
+
+.text-button-md {
+  font-size: 1rem;          /* 16px */
+  font-weight: 500;
+  line-height: 1.25;
+  letter-spacing: 0;
+}
+
+.text-button-sm {
+  font-size: 0.875rem;      /* 14px */
+  font-weight: 500;
+  line-height: 1.29;
+  letter-spacing: 0;
+}
+
+.text-nav-link {
+  font-size: 1rem;          /* 16px */
+  font-weight: 600;
+  line-height: 1.25;
+  letter-spacing: 0;
+}
+
+/* -------------------------------------------------------------------------
+   Component utility classes — Airbnb component tokens
+   ------------------------------------------------------------------------- */
+
+/* Buttons */
+.btn-primary {
+  background-color: var(--color-primary);
+  color: var(--color-on-primary);
+  border-radius: var(--radius-sm);
+  padding: 14px 24px;
+  height: var(--button-height-md);
+  font-size: 1rem;
+  font-weight: 500;
+  line-height: 1.25;
+  border: none;
+  cursor: pointer;
+  transition: background-color var(--transition-fast);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-primary:hover {
+  background-color: var(--color-primary-active);
+}
+
+.btn-primary:disabled {
+  background-color: var(--color-primary-disabled);
+  cursor: not-allowed;
+}
+
+.btn-secondary {
+  background-color: var(--color-canvas);
+  color: var(--color-ink);
+  border-radius: var(--radius-sm);
+  padding: 13px 23px;
+  height: var(--button-height-md);
+  font-size: 1rem;
+  font-weight: 500;
+  line-height: 1.25;
+  border: 1px solid var(--color-ink);
+  cursor: pointer;
+  transition: background-color var(--transition-fast);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-secondary:hover {
+  background-color: var(--color-surface-soft);
+}
+
+.btn-pill-primary {
+  background-color: var(--color-primary);
+  color: var(--color-on-primary);
+  border-radius: var(--radius-full);
+  padding: 10px 20px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  border: none;
+  cursor: pointer;
+  transition: background-color var(--transition-fast);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Card */
+.card {
+  background-color: var(--color-canvas);
+  border-radius: var(--radius-md);
+  transition: box-shadow var(--transition-base);
+}
+
+.card:hover {
+  box-shadow: var(--shadow-card);
+}
+
+/* Hairline divider */
+.divider {
+  border: none;
+  border-top: 1px solid var(--color-hairline);
+}
+
+.divider-soft {
+  border: none;
+  border-top: 1px solid var(--color-hairline-soft);
+}
+
+/* Search orb */
+.search-orb {
+  background-color: var(--color-primary);
+  color: var(--color-on-primary);
+  border-radius: var(--radius-full);
+  width: var(--search-orb-size);
+  height: var(--search-orb-size);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background-color var(--transition-fast);
+}
+
+.search-orb:hover {
+  background-color: var(--color-primary-active);
+}
+
+/* Icon button (circular) */
+.icon-btn {
+  background-color: var(--color-surface-strong);
+  color: var(--color-ink);
+  border-radius: var(--radius-full);
+  width: var(--icon-btn-size);
+  height: var(--icon-btn-size);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  cursor: pointer;
+  transition: background-color var(--transition-fast);
+}
+
+/* Guest favorite badge */
+.badge-guest-favorite {
+  background-color: var(--color-canvas);
+  color: var(--color-ink);
+  border-radius: var(--radius-full);
+  padding: 4px 10px;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  line-height: 1.18;
+  box-shadow: var(--shadow-card);
+}
+
+/* NEW tag */
+.tag-new {
+  background-color: var(--color-canvas);
+  color: var(--color-ink);
+  border-radius: var(--radius-full);
+  padding: 2px 6px;
+  font-size: 0.5rem;
+  font-weight: 700;
+  line-height: 1.25;
+  letter-spacing: 0.32px;
+  text-transform: uppercase;
+}
+
+/* Modal scrim */
+.scrim {
+  background-color: var(--color-scrim);
+  opacity: 0.5;
+}
+
+/* Container */
+.container-main {
+  max-width: var(--container-max);
+  margin-inline: auto;
+  padding-inline: var(--spacing-xl);
+}
+
+.container-detail {
+  max-width: var(--container-detail);
+  margin-inline: auto;
+  padding-inline: var(--spacing-xl);
 }

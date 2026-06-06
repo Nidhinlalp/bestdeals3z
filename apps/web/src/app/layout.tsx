@@ -2,57 +2,64 @@ import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import './globals.css';
 
-// =============================================================================
-// Font — Inter
-// =============================================================================
-// Inter is the recommended open-source substitute for Airbnb Cereal VF.
-// Per DESIGN-airbnb.md: "If Airbnb Cereal VF and Circular are unavailable,
-// Inter is the closest open-source substitute."
-//
-// Variable font loaded for full weight axis support (400–700 range used in
-// the Airbnb type scale).
-// =============================================================================
+import { Header } from '@/components/layout/header';
+import { Footer } from '@/components/layout/footer';
+import { MobileBottomNav } from '@/components/layout/mobile-bottom-nav';
+import { MobileMenu } from '@/components/layout/mobile-menu';
+import { CartDrawer } from '@/components/layout/cart-drawer';
+import { SearchOverlay } from '@/components/layout/search-overlay';
+import { WhatsAppFab } from '@/components/layout/whatsapp-fab';
+import { QuickView } from '@/components/product/quick-view';
+import { Toaster } from '@/components/ui/toaster';
 
+// =============================================================================
+// Font — Inter (open-source substitute for Airbnb Cereal VF, per DESIGN-airbnb.md)
+// =============================================================================
 const inter = Inter({
   variable: '--font-inter',
   subsets: ['latin'],
   display: 'swap',
-  // Load the weights used in the Airbnb type scale
-  weight: ['400', '500', '600', '700'],
+  weight: ['400', '500', '600', '700', '800'],
 });
 
 export const metadata: Metadata = {
   title: {
-    default: 'BestDeal3Z — Gadgets, Toys, Home & Lifestyle',
+    default: 'BestDeal3Z — Gadgets, Electronics, Home, Toys & Lifestyle',
     template: '%s | BestDeal3Z',
   },
   description:
-    'Shop the best deals on gadgets, toys, home products, electronics, and lifestyle items. Order via WhatsApp for fast, personal service.',
-  keywords: ['gadgets', 'toys', 'electronics', 'home products', 'lifestyle', 'deals'],
+    'Shop premium gadgets, electronics, home, toys and lifestyle products. Fast, futuristic, and built for WhatsApp ordering.',
+  keywords: [
+    'gadgets',
+    'electronics',
+    'toys',
+    'home products',
+    'lifestyle',
+    'deals',
+    'whatsapp shopping',
+  ],
   metadataBase: new URL(process.env['NEXT_PUBLIC_APP_URL'] ?? 'http://localhost:3000'),
-  openGraph: {
-    type: 'website',
-    siteName: 'BestDeal3Z',
-    locale: 'en_IN',
-  },
-  twitter: {
-    card: 'summary_large_image',
-  },
-  robots: {
-    index: true,
-    follow: true,
-  },
+  openGraph: { type: 'website', siteName: 'BestDeal3Z', locale: 'en_IN' },
+  twitter: { card: 'summary_large_image' },
+  robots: { index: true, follow: true },
 };
 
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en" className={inter.variable}>
-      <body className="antialiased">
-        {children}
+      <body className="font-sans antialiased">
+        <Header />
+        <main className="min-h-[60vh] pb-16 sm:pb-0">{children}</main>
+        <Footer />
+
+        {/* Global overlays */}
+        <MobileBottomNav />
+        <WhatsAppFab />
+        <CartDrawer />
+        <SearchOverlay />
+        <MobileMenu />
+        <QuickView />
+        <Toaster />
       </body>
     </html>
   );

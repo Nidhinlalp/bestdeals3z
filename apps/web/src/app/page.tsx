@@ -1,103 +1,72 @@
-import Image from "next/image";
+import { getBestsellers, getFeatured, getNewArrivals, getTrending } from '@/data';
+import { Hero } from '@/components/sections/hero';
+import { CategoryShowcase } from '@/components/sections/category-showcase';
+import { ProductRailSection } from '@/components/sections/product-rail-section';
+import { FlashSale } from '@/components/sections/flash-sale';
+import { PromoBanners } from '@/components/sections/promo-banners';
+import { FeaturedCollection } from '@/components/sections/featured-collection';
+import { BrandTrust } from '@/components/sections/brand-trust';
+import { Testimonials } from '@/components/sections/testimonials';
+import { FaqPreview } from '@/components/sections/faq-preview';
+import { WhatsAppCta } from '@/components/sections/whatsapp-cta';
+import { NewsletterSection } from '@/components/sections/newsletter-section';
 
-export default function Home() {
+export default function HomePage() {
   return (
-    <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="font-mono list-inside list-decimal text-sm/6 text-center sm:text-left">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] font-mono font-semibold px-1 py-0.5 rounded">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
+    <>
+      <Hero />
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
-        </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
+      <CategoryShowcase />
+
+      <ProductRailSection
+        eyebrow="Handpicked"
+        title="Featured products"
+        subtitle="Our team's current favourites across every category."
+        products={getFeatured()}
+        action={{ label: 'Shop all', href: '/shop' }}
+      />
+
+      <FlashSale />
+
+      <ProductRailSection
+        eyebrow="Hot right now"
+        title="Trending this week"
+        subtitle="What everyone's adding to cart."
+        products={getTrending()}
+        action={{ label: 'View more', href: '/shop' }}
+        tinted
+      />
+
+      <PromoBanners />
+
+      <ProductRailSection
+        eyebrow="Crowd favourites"
+        title="Bestsellers"
+        subtitle="Tried, tested and loved by thousands."
+        products={getBestsellers()}
+        action={{ label: 'Shop bestsellers', href: '/shop' }}
+      />
+
+      <FeaturedCollection />
+
+      <BrandTrust />
+
+      <ProductRailSection
+        eyebrow="Just landed"
+        title="New arrivals"
+        subtitle="The latest additions to the BestDeal3Z lineup."
+        products={getNewArrivals()}
+        action={{ label: 'See what’s new', href: '/shop?sort=newest' }}
+        tinted
+      />
+
+      <Testimonials />
+
+      <WhatsAppCta />
+
+      <FaqPreview />
+
+      <NewsletterSection />
+    </>
   );
 }

@@ -20,6 +20,11 @@ const nextConfig: NextConfig = {
   // Image configuration
   images: {
     remotePatterns: [
+      // Mock product photography for the UI-only build (no backend yet)
+      {
+        protocol: 'https',
+        hostname: 'picsum.photos',
+      },
       // TODO: Add Cloudflare R2 public URL when configured
       // {
       //   protocol: 'https',

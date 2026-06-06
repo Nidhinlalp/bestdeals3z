@@ -1,0 +1,5 @@
+# Custom React hooks for apps/web
+# Examples:
+#   useCart.ts      - Cart actions + Zustand
+#   useProduct.ts   - Product data with TanStack Query
+#   useWhatsApp.ts  - WhatsApp deep link generation

@@ -1,0 +1,7 @@
+# Web-specific UI components
+# Organized by feature:
+#   layout/         - Header, Footer, Navigation components
+#   product/        - ProductCard, ProductGrid, ProductDetail
+#   cart/           - CartSidebar, CartItem, CartSummary
+#   category/       - CategoryCard, CategoryGrid
+#   common/         - Loading, Error, Empty states

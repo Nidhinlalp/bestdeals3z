@@ -1,0 +1,5 @@
+# Shared services used across multiple feature modules.
+# Examples:
+#   logger.service.ts     - Structured logging
+#   mail.service.ts       - Email notifications
+#   whatsapp.service.ts   - WhatsApp API client (future)

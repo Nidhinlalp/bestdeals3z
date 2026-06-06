@@ -1,0 +1,60 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// =============================================================================
+// Database Configuration
+// =============================================================================
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  // Uncomment for connection pooling with Neon:
+  // directUrl = env("DIRECT_URL")
+}
+
+// =============================================================================
+// FUTURE ENTITIES — To be implemented in upcoming sprints
+// =============================================================================
+// The following models will be added as features are built:
+//
+// ┌──────────────────────────────────────────────────────────────────────────┐
+// │  USER MODULE                                                             │
+// │  - User          : Customer accounts and admin accounts                  │
+// │  - Address       : Shipping/billing addresses linked to users            │
+// │  - UserSession   : JWT refresh token tracking                            │
+// ├──────────────────────────────────────────────────────────────────────────┤
+// │  CATALOG MODULE                                                          │
+// │  - Category      : Hierarchical product categories (gadgets, toys, etc.) │
+// │  - Product       : Core product entity with metadata                     │
+// │  - ProductVariant: Size, color, and other variant dimensions             │
+// │  - ProductImage  : Product image references (Cloudflare R2)             │
+// │  - Tag           : Product tagging for search and filtering              │
+// ├──────────────────────────────────────────────────────────────────────────┤
+// │  CART MODULE                                                             │
+// │  - Cart          : Session-based or user-based shopping cart             │
+// │  - CartItem      : Individual items in a cart                            │
+// ├──────────────────────────────────────────────────────────────────────────┤
+// │  ORDER MODULE                                                            │
+// │  - Order         : Order lifecycle management                            │
+// │  - OrderItem     : Line items within an order                            │
+// │  - OrderStatus   : Status history / audit log                            │
+// ├──────────────────────────────────────────────────────────────────────────┤
+// │  WHATSAPP MODULE                                                         │
+// │  - WhatsAppLead  : Customer contacts collected via WhatsApp              │
+// │  - CheckoutLink  : Generated WhatsApp checkout deep links                │
+// ├──────────────────────────────────────────────────────────────────────────┤
+// │  CONTENT MODULE                                                          │
+// │  - Banner        : Promotional banners and hero images                   │
+// │  - Media         : Cloudflare R2 object metadata                         │
+// │  - Review        : Product reviews and ratings                           │
+// └──────────────────────────────────────────────────────────────────────────┘
+//
+// When adding models:
+//   1. Define the model below
+//   2. Run: pnpm --filter api prisma migrate dev --name <migration-name>
+//   3. Run: pnpm --filter api prisma generate
+// =============================================================================

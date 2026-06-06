@@ -1,0 +1,8 @@
+# Feature modules go here — one subdirectory per domain feature.
+# Each module follows NestJS module pattern:
+#   <feature>/
+#     <feature>.module.ts
+#     <feature>.controller.ts
+#     <feature>.service.ts
+#     dto/
+#     entities/ (or use Prisma types directly)

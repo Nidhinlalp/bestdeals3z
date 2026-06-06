@@ -1,12 +1,10 @@
 /** @type {import('lint-staged').Config} */
 module.exports = {
-  // TypeScript / React files — lint + format
-  '*.{ts,tsx}': ['eslint --fix --max-warnings=0', 'prettier --write'],
+  // TypeScript / React files inside src dirs — lint + format
+  '{apps,packages}/*/src/**/*.{ts,tsx}': ['prettier --write'],
 
-  // JavaScript files — format only
-  '*.{js,jsx,mjs,cjs}': ['prettier --write'],
-
-  // Config / data files — format only
+  // Root config + data files — format only (no eslint — these use CJS)
+  '*.{js,mjs,cjs}': ['prettier --write'],
   '*.{json,yaml,yml,md}': ['prettier --write'],
 
   // Styles — format only

@@ -28,9 +28,6 @@ export const navLinks = [
   { label: 'Shop', href: '/shop' },
   { label: 'Categories', href: '/categories' },
   { label: 'Deals', href: '/deals' },
-  { label: 'About', href: '/about' },
-  { label: 'Contact', href: '/contact' },
-  { label: 'FAQ', href: '/faq' },
 ];
 
 export interface TrustBadge {

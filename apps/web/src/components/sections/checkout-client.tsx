@@ -168,7 +168,7 @@ export function CheckoutClient() {
                 <Input
                   value={form.phone}
                   onChange={(e) => set('phone', e.target.value)}
-                  placeholder="+91 98765 43210"
+                  placeholder="+91 79948 67698"
                   inputMode="tel"
                   aria-invalid={!!errors.phone}
                 />

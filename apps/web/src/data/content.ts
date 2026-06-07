@@ -10,13 +10,13 @@ export const siteConfig = {
   tagline: 'The future of everyday shopping',
   description:
     'Gadgets, electronics, home, toys and lifestyle — handpicked, fairly priced, and delivered fast. Order in seconds on WhatsApp.',
-  whatsappNumber: '+91 98765 43210',
-  phone: '+91 98765 43210',
+  whatsappNumber: '+91 79948 67698',
+  phone: '+91 79948 67698',
   email: 'hello@bestdeal3z.com',
   address: 'Infopark Phase 1, Kochi, Kerala 682030, India',
   hours: 'Mon – Sat · 9:00 AM – 9:00 PM IST',
   socials: [
-    { name: 'Instagram', href: '#' },
+    { name: 'Instagram', href: 'https://www.instagram.com/bestdeal3z/' },
     { name: 'Facebook', href: '#' },
     { name: 'Twitter', href: '#' },
     { name: 'Youtube', href: '#' },

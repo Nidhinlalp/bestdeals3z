@@ -58,7 +58,7 @@ export function Footer() {
           <Logo />
           <p className="text-body-sm text-muted mt-4 max-w-xs">{siteConfig.description}</p>
           <p className="text-caption text-ink mt-5">Get fresh drops & deals</p>
-          <div className="mt-2 max-w-sm">
+          <div className="mt-2 w-full min-w-0 max-w-sm">
             <NewsletterForm />
           </div>
           <div className="mt-5 flex gap-2">

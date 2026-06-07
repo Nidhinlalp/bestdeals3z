@@ -17,7 +17,7 @@ export function NewsletterSection() {
               Subscribe for early access to drops, members-only flash deals, and a welcome treat.
             </p>
           </div>
-          <div className="lg:w-full lg:max-w-md lg:justify-self-end">
+          <div className="w-full min-w-0 lg:max-w-md lg:justify-self-end">
             <NewsletterForm />
             <p className="text-caption-sm text-muted mt-3">
               No spam, ever. Unsubscribe anytime in one tap.

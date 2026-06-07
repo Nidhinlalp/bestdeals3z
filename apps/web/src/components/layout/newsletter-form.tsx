@@ -26,8 +26,10 @@ export function NewsletterForm({ variant = 'light' }: { variant?: 'light' | 'dar
         setTimeout(() => setDone(false), 2500);
       }}
       className={cn(
-        'focus-within:border-ink flex w-full items-center gap-2 overflow-hidden rounded-full border p-1.5 pl-5 transition-colors',
-        dark ? 'border-white/20 bg-white/10 focus-within:border-white' : 'border-hairline bg-canvas'
+        'focus-within:border-ink flex w-full flex-col gap-2.5 transition-colors sm:flex-row sm:items-center sm:gap-2 sm:rounded-full sm:border sm:p-1.5 sm:pl-5',
+        dark
+          ? 'sm:border-white/20 sm:bg-white/10 sm:focus-within:border-white'
+          : 'sm:border-hairline sm:bg-canvas'
       )}
     >
       <input
@@ -37,14 +39,16 @@ export function NewsletterForm({ variant = 'light' }: { variant?: 'light' | 'dar
         onChange={(e) => setEmail(e.target.value)}
         placeholder="Enter your email"
         className={cn(
-          'text-body-sm h-10 min-w-0 flex-1 bg-transparent outline-none',
-          dark ? 'text-white placeholder:text-white/50' : 'text-ink placeholder:text-muted-soft'
+          'text-body-sm h-11 min-w-0 flex-1 rounded-full border px-5 outline-none transition-colors sm:h-10 sm:border-0 sm:bg-transparent sm:px-0',
+          dark
+            ? 'border-white/20 bg-white/10 text-white placeholder:text-white/50 focus:border-white'
+            : 'border-hairline bg-canvas text-ink placeholder:text-muted-soft focus:border-ink'
         )}
       />
       <button
         type="submit"
         className={cn(
-          'press text-button-sm flex h-10 shrink-0 items-center gap-1.5 rounded-full px-5 font-semibold transition-colors',
+          'press text-button-sm flex h-11 w-full shrink-0 items-center justify-center gap-1.5 rounded-full px-5 font-semibold transition-colors sm:h-10 sm:w-auto',
           done
             ? 'bg-success text-white'
             : dark

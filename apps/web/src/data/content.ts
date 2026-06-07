@@ -12,7 +12,7 @@ export const siteConfig = {
     'Gadgets, electronics, home, toys and lifestyle — handpicked, fairly priced, and delivered fast. Order in seconds on WhatsApp.',
   whatsappNumber: '+91 79948 67698',
   phone: '+91 79948 67698',
-  email: 'hello@bestdeal3z.com',
+  email: 'bestdeal3zinfo@gmail.com',
   address: 'Infopark Phase 1, Kochi, Kerala 682030, India',
   hours: 'Mon – Sat · 9:00 AM – 9:00 PM IST',
   socials: [
